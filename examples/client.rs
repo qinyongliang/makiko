@@ -187,7 +187,7 @@ struct HostFile {
 }
 
 fn read_host_file(path: Option<PathBuf>) -> Result<Option<HostFile>> {
-    let default_path = home::home_dir().map(|dir| dir.join(".ssh/known_hosts"));
+    let default_path = Some(PathBuf::from(".ssh/known_hosts"));
     let Some(path) = path.or(default_path) else { return Ok(None) };
 
     let file_data = fs::read(&path)
