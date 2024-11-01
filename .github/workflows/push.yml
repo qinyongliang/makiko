@@ -76,13 +76,17 @@ jobs:
           #   arch: "amd64-musl"
           #   rust-target: "x86_64-unknown-linux-musl"
           #   runs-on: ubuntu-latest
-          - os: linux
-            arch: "arm64"
-            rust-target: "aarch64-unknown-linux-gnu"
-            runs-on: ubuntu-latest
+          # - os: linux
+          #   arch: "arm64"
+          #   rust-target: "aarch64-unknown-linux-gnu"
+          #   runs-on: ubuntu-latest
           - os: linux
             arch: "arm64"
             rust-target: "aarch64-unknown-linux-musl"
+            runs-on: ubuntu-latest
+          - os: linux
+            arch: "arm64"
+            rust-target: "aarch64-linux-android"
             runs-on: ubuntu-latest
           # - os: linux
           #   arch: "arm64-musl"
@@ -135,7 +139,7 @@ jobs:
 
       - name: Set executable filename
         id: set_filename
-        run: echo "filename=ssh-${{ matrix.target.os }}-${{ matrix.target.arch }}${{ steps.set_extension.outputs.extension }}" >> $GITHUB_OUTPUT
+        run: echo "filename=ssh-${{ matrix.target.os }}-${{ matrix.target.arch }}-${{ matrix.target.rust-target }}${{ steps.set_extension.outputs.extension }}" >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v4
         with:
